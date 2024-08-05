@@ -12,7 +12,7 @@ export const PrimaryInfoCard: FC<PrimaryInfoCardProps> = ({user}) => {
   return (
     <Card>
       <BlockStack gap="200">
-        <InlineGrid columns="1fr auto">
+        <InlineGrid columns="1fr auto auto">
           <Text as="h2" variant="headingSm">
             Primary info
           </Text>
