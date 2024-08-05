@@ -16,22 +16,6 @@ export async function adminUsersRoleAction({request, params}: ActionFunctionArgs
     return redirect(EAdminNavigation.users);
   }
 
-  const formData = await request.formData();
-  const actionType = formData.get('actionType');
-
-  //delete user
-  if (actionType === 'delete') {
-    try {
-      await prisma.user.delete({
-        where: { id: Number(id) },
-      });
-      return redirect(EAdminNavigation.users);
-    } catch (error) {
-      console.error("Failed to delete user:", error);
-      return json({ error: 'Failed to delete user' }, { status: 500 });
-    }
-  }
-
   // get user
   const user = await prisma.user.findFirst({
     where: {id: Number(id)}
@@ -41,6 +25,8 @@ export async function adminUsersRoleAction({request, params}: ActionFunctionArgs
   if (!user) {
     return redirect(EAdminNavigation.users);
   }
+
+  const formData = await request.formData();
 
   // validate form data
   const data = await usersRoleFormValidator.validate(
