@@ -1,4 +1,4 @@
-import { Modal, TextContainer,InlineStack, FormLayout } from '@shopify/polaris';
+import { Modal, TextContainer,InlineStack, FormLayout, Button } from '@shopify/polaris';
 import {ValidatedForm} from 'remix-validated-form';
 import { TUserDto } from '~/.server/admin/dto/user.dto';
 import { EAdminNavigation } from '~/admin/constants/navigation.constant';
@@ -59,14 +59,13 @@ export default function DeleteModal({user, active, toggleModal}: DeleteModalProp
           <FormLayout>
             <input type="hidden" name="id" value={user.id} />
             <input type="hidden" name="actionType" value="delete" />
+
+            <Button submit={true} variant="primary" tone="critical" >
+              Delete User
+            </Button>
           </FormLayout>
         </Modal.Section>
-        <Modal.Section>
-          <InlineStack direction="row-reverse" align="end" gap="200">
-            <ValidatedSubmitButton text={"Delete"} variant="primary" />
-          </InlineStack>
-        </Modal.Section>
-      </ValidatedForm>
+    </ValidatedForm>
     </Modal>
-  )
+  );
 }

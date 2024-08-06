@@ -21,26 +21,28 @@ async function changeRoleAction(formData: FormData, id: string) {
 
   // update user
   await prisma.user.update({
-    where: {id: user.id},
+    where: {id: Number(id)},
     data: {
       role: role as $Enums.AdminRole
     }
   });
 
   // redirect to user page
-  return redirect(`${EAdminNavigation.users}/${user.id}`);
+  return redirect(`${EAdminNavigation.users}/${id}`);
 }
 
 
-async function deleteUserAction(formData: FormData, id: number) {
+async function deleteUserAction(formData: FormData, id: string) {
   try {
-    const userWrights = await userRoleValidator.validate(formData);
-    if (userWrights.error) {
-      return validationError(userWrights.error);
+
+     // validate form data
+    const data = await userRoleValidator.validate(
+      formData
+    );
+
+    if (data.error) {
+      return validationError(data.error);
     }
-    /*if (user.role !== $Enums.AdminRole.ADMIN) {
-      return validationError({ error: 'You do not have permission to delete users.' });
-    }*/
 
     await prisma.user.update({
       where: { id: Number(id) },

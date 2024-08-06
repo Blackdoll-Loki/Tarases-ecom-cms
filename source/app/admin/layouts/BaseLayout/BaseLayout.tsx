@@ -1,6 +1,6 @@
 import {Frame} from '@shopify/polaris';
 import {FC, PropsWithChildren, useCallback, useState} from 'react';
-import {BaseNav} from '~/admin/navigations/BaseNav/BaseNav';
+import {BaseNav, Navigation} from '~/admin/navigations/BaseNav/BaseNav';
 import {AppBar} from '~/admin/components/AppBar/AppBar';
 import {TUserDto} from '~/.server/admin/dto/user.dto';
 
@@ -32,7 +32,7 @@ export const BaseLayout: FC<BaseLayoutProps> = ({children, user}) => {
     <Frame
       logo={logo}
       topBar={<AppBar user={user} onNavigationToggle={toggleMobileNavigationActive}/>}
-      navigation={<BaseNav/>}
+      navigation={<Navigation/>}
       showMobileNavigation={mobileNavigationActive}
       onNavigationDismiss={toggleMobileNavigationActive}
     >
