@@ -8,7 +8,7 @@
     "**/.client/**/*.tsx",
     "prisma/*.ts",
     "prisma/**/*.ts"
-  ],
+, "app/routes/admin.customers._indextsx"  ],
   "compilerOptions": {
     "lib": [
       "DOM",
