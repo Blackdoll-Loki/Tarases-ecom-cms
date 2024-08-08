@@ -54,10 +54,7 @@ export default function DeleteModal({user, active, toggleModal}: DeleteModalProp
           <TextContainer>
             Are you sure you want to delete this user? This action cannot be undone.
           </TextContainer>
-        </Modal.Section>
-        <Modal.Section>
           <FormLayout>
-            <input type="hidden" name="id" value={user.id} />
             <input type="hidden" name="actionType" value="delete" />
 
             <Button submit={true} variant="primary" tone="critical" >
