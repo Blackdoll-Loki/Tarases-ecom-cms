@@ -23,7 +23,7 @@ export async function adminCustomersNewAction({request}: ActionFunctionArgs) {
 
   const {email,firstName,lastName,password,phone,notes} = data.data;
 
-  const exist = await prisma.user.findFirst({where: {email}});
+  const exist = await prisma.customer?.findFirst({where: {email}});
   if (exist) {
     return validationError({
       fieldErrors: {
@@ -32,7 +32,7 @@ export async function adminCustomersNewAction({request}: ActionFunctionArgs) {
     });
   }
 
-  const newUser = await prisma.customer.create({
+  const newCustomer = await prisma.customer.create({
     data: {
       email,
       password: await hashPassword(password),

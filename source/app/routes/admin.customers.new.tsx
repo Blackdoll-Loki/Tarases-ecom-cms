@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+/*import React, {useCallback} from 'react';
 import {Page} from '@shopify/polaris';
 import {EAdminNavigation} from '~/admin/constants/navigation.constant';
 import {usersNewFormValidator} from '~/admin/components/UsersNewForm/UsersNewForm.validator';
@@ -30,4 +30,4 @@ export default function AdminCustomersNew() {
       </Page>
     </ValidatedForm>
   );
-}
+}*/
