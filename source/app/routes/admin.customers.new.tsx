@@ -5,7 +5,7 @@ import {ValidatedForm} from 'remix-validated-form';
 import {ValidatedSubmitButton} from '~/admin/ui/ValidatedSubmitButton/ValidatedSubmitButton';
 import {adminCustomersNewAction} from '~/.server/admin/actions/customers.new.action';
 import { CustomersDefaultAddressForm } from '~/admin/components/Customer/DefaultAddress';
-import CustomerNotesCard from '~/admin/components/Customer/CustomerNotesCard';
+import {CustomerNotesCard }from '~/admin/components/Customer/CustomerNotesCard';
 import { CustomersOverviewForm } from '~/admin/components/Customer/CustomersOverviewForm';
 import { useLoaderData } from '@remix-run/react';
 import { customerNewLoader } from '~/.server/admin/loaders/customer.new.loader';
@@ -20,7 +20,6 @@ export const loader = customerNewLoader;
 export default function AdminCustomersNew() {
   const data = useLoaderData<typeof loader>();
   const customer = data.customer as TCustomerDto;
-  console.log(customer)
 
   const primaryAction = useCallback(() => (
     <ValidatedSubmitButton text="save" variant="primary"/>
@@ -31,14 +30,14 @@ export default function AdminCustomersNew() {
       <Page
         title="New customer"
         backAction={{
-          url: EAdminNavigation.users
+          url: `${EAdminNavigation.customers}/new`
         }}
         primaryAction={primaryAction()}
       >
         <BlockStack gap="500">
           <CustomersOverviewForm customer={customer}/>
-          <CustomersDefaultAddressForm />
-          <CustomerNotesCard />
+          <CustomersDefaultAddressForm customer={customer}/>
+          <CustomerNotesCard  customer={customer}/>
         </BlockStack>
       </Page>
     </ValidatedForm>

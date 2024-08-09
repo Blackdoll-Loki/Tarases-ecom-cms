@@ -1,7 +1,9 @@
 import { Box, FormLayout, Layout, Select, TextField } from "@shopify/polaris";
-import { useCallback, useState } from "react";
+import { FC, useCallback, useState } from "react";
+import { ValidatedTextField } from "~/admin/ui/ValidatedTextField/ValidatedTextField";
+import { CustomersOverviewFormProps } from "./CustomersOverviewForm";
 
-export const CustomersDefaultAddressForm = () => {
+export const CustomersDefaultAddressForm: FC<CustomersOverviewFormProps> = ({ customer }) => {
   const [selected, setSelected] = useState('Ukraine');
 
   const handleSelectChange = useCallback(
@@ -33,23 +35,29 @@ export const CustomersDefaultAddressForm = () => {
             </FormLayout>
             <FormLayout>
               <FormLayout.Group>
-                  <TextField
-                    label="First name"
-                    onChange={() => {}}
-                    autoComplete="off"
-                  />
-                  <TextField
-                    label="Last name"
-                    onChange={() => {}}
-                    autoComplete="off"
-                  />
-                </FormLayout.Group>
+              <ValidatedTextField
+                label="First Name"
+                type="text"
+                name="firstName"
+                autoComplete="given-name"
+                defaultValue={customer?.firstName || ''}
+              />
+              <ValidatedTextField
+                label="Last Name"
+                type="text"
+                name="lastName"
+                autoComplete="last name"
+                defaultValue={customer?.lastName || ''}
+              />
+              </FormLayout.Group>
             </FormLayout>
             <FormLayout>
-              <TextField
+            <ValidatedTextField
                 label="Phone number"
-                onChange={() => {}}
-                autoComplete="off"
+                type="text"
+                name="phone"
+                autoComplete="phone"
+                defaultValue={customer?.phone || ''}
               />
             </FormLayout>
           </Box>

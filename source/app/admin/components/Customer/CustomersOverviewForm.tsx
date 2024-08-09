@@ -1,17 +1,13 @@
 import { Box, FormLayout, Layout, TextField } from "@shopify/polaris";
 import { FC, useState } from "react";
 import { TCustomerDto } from "~/.server/admin/dto/customer.dto";
+import { ValidatedTextField } from "~/admin/ui/ValidatedTextField/ValidatedTextField";
 
 export type CustomersOverviewFormProps = {
   customer?: TCustomerDto;
 };
 
 export const CustomersOverviewForm: FC<CustomersOverviewFormProps> = ({ customer }) => {
-  const [firstName, setFirstName] = useState(customer?.firstName || '');
-  const [lastName, setLastName] = useState(customer?.lastName || '');
-  const [email, setEmail] = useState(customer?.email || '');
-  const [phone, setPhone] = useState(customer?.phone || '');
-
   return (
     <Layout>
       <Layout.Section>
@@ -22,43 +18,39 @@ export const CustomersOverviewForm: FC<CustomersOverviewFormProps> = ({ customer
           <Box width="586px" borderColor="border">
             <FormLayout>
               <FormLayout.Group>
-                <TextField
-                  label="First Name"
-                  type="text"
-                  name="firstName"
-                  autoComplete="off"
-                  value={firstName}
-                  onChange={(value) => setFirstName(value)}
-                />
-                <TextField
-                  label="Last Name"
-                  type="text"
-                  name="lastName"
-                  autoComplete="off"
-                  value={lastName}
-                  onChange={(value) => setLastName(value)}
-                />
+              <ValidatedTextField
+                label="First Name"
+                type="text"
+                name="firstName"
+                autoComplete="given-name"
+                defaultValue={customer?.firstName || ''}
+              />
+              <ValidatedTextField
+                label="Last Name"
+                type="text"
+                name="lastName"
+                autoComplete="last name"
+                defaultValue={customer?.lastName || ''}
+              />
               </FormLayout.Group>
             </FormLayout>
             <FormLayout>
-              <TextField
-                label="Email"
-                type="text"
-                name="email"
-                autoComplete="off"
-                value={email}
-                onChange={(value) => setEmail(value)}
-              />
+            <ValidatedTextField
+              label="Email"
+              type="text"
+              name="email"
+              autoComplete="email"
+              defaultValue={customer?.email || ''}
+            />
             </FormLayout>
             <FormLayout>
-              <TextField
-                label="Phone"
-                type="text"
-                name="phone"
-                autoComplete="off"
-                value={phone}
-                onChange={(value) => setPhone(value)}
-              />
+            <ValidatedTextField
+              label="Phone"
+              type="text"
+              name="phone"
+              autoComplete="phone"
+              defaultValue={customer?.phone || ''}
+            />
             </FormLayout>
           </Box>
         </Box>

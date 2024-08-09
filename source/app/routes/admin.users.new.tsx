@@ -5,9 +5,9 @@ import {UsersNewForm} from '~/admin/components/UsersNewForm/UsersNewForm';
 import {usersNewFormValidator} from '~/admin/components/UsersNewForm/UsersNewForm.validator';
 import {ValidatedForm} from 'remix-validated-form';
 import {ValidatedSubmitButton} from '~/admin/ui/ValidatedSubmitButton/ValidatedSubmitButton';
-import {adminUsersNewAction} from '~/.server/admin/actions/users.new.action';
+import { adminCustomersNewAction } from '~/.server/admin/actions/customers.new.action';
 
-export const action = adminUsersNewAction;
+export const action = adminCustomersNewAction;
 
 export default function AdminUsersNew() {
   const primaryAction = useCallback(() => (

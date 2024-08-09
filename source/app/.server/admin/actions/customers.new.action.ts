@@ -1,6 +1,5 @@
-import { ActionFunctionArgs, redirect } from "@remix-run/node";
+import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
 import { validationError } from "remix-validated-form";
-import { hashPassword } from "~/.server/shared/utils/auth.util";
 import { prisma } from "~/.server/shared/utils/prisma.util";
 import { CustomerNewFormValidator } from "~/admin/components/Customer/CustomerNewForm.validator";
 import { EAdminNavigation } from "~/admin/constants/navigation.constant";
@@ -20,7 +19,7 @@ export async function adminCustomersNewAction({request}: ActionFunctionArgs) {
     return validationError(data.error);
   }
 
-  const {email,firstName,lastName,password,phone,notes} = data.data;
+  const {email,firstName,lastName,phone,notes} = data.data;
 
   const exist = await prisma.customer?.findFirst({where: {email}});
   if (exist) {
@@ -31,17 +30,20 @@ export async function adminCustomersNewAction({request}: ActionFunctionArgs) {
     });
   }
 
-  const newCustomer = await prisma.customer.create({
-    data: {
-      email,
-      password: await hashPassword(password),
-      firstName: firstName,
-      lastName: lastName,
-      phone,
-      notes
-    }
-  });
 
-  return redirect(`${EAdminNavigation.customers}/${newCustomer.id}`);
+  try {
+    const newCustomer = await prisma.customer.create({
+      data: {
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        phone: phone,
+        notes: notes
+      }
+    });
+    return redirect(`${EAdminNavigation.customers}/${newCustomer.id}`);
+  } catch (error) {
+    return json({ error: 'Ошибка создания клиента' }, { status: 500 });
+  }
 }
 
