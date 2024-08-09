@@ -4,7 +4,6 @@ import { hashPassword } from "~/.server/shared/utils/auth.util";
 import { prisma } from "~/.server/shared/utils/prisma.util";
 import { CustomerNewFormValidator } from "~/admin/components/Customer/CustomerNewForm.validator";
 import { EAdminNavigation } from "~/admin/constants/navigation.constant";
-import { joinFirstName } from "~/admin/utils/user.util";
 import { authenticator } from "../services/auth.service";
 
 export async function adminCustomersNewAction({request}: ActionFunctionArgs) {
@@ -36,12 +35,13 @@ export async function adminCustomersNewAction({request}: ActionFunctionArgs) {
     data: {
       email,
       password: await hashPassword(password),
-      fullName: joinFirstName(firstName, lastName),
+      firstName: firstName,
+      lastName: lastName,
       phone,
       notes
     }
   });
 
-  return redirect(`${EAdminNavigation.customers}/${newUser.id}`);
+  return redirect(`${EAdminNavigation.customers}/${newCustomer.id}`);
 }
 
