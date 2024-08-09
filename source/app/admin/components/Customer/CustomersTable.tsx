@@ -3,20 +3,20 @@ import React, {FC, useMemo} from 'react';
 import type {NonEmptyArray} from '@shopify/polaris/build/ts/src/types';
 import {IndexTableHeading} from '@shopify/polaris/build/ts/src/components/IndexTable/IndexTable';
 import {EAdminNavigation} from '~/admin/constants/navigation.constant';
-import type {TAdminUsersLoaderData} from '~/.server/admin/loaders/users.loader';
 import {AdminUsersTableFilters} from '~/admin/components/UsersTable/UsersTableFilters';
 import {IOffsetPaginationInfoDto} from '~/.server/shared/dto/offset-pagination-info.dto';
 import {usePagination} from '~/admin/hooks/usePagination';
 import { TCustomerDto } from '~/.server/admin/dto/customer.dto';
+import { TCustomersLoaderData } from '~/.server/admin/loaders/customers.loader';
 
 export interface CustomersTableProps {
   customers: TCustomerDto[];
-  query?: TAdminUsersLoaderData['query'];
+  query?: TCustomersLoaderData['query'];
   pagination: IOffsetPaginationInfoDto;
 }
 
 
-export const AdminUsersTable: FC<CustomersTableProps> = ({customers, query, pagination}) => {
+export const CustomersTable: FC<CustomersTableProps> = ({customers, query, pagination}) => {
   const paginationProps = usePagination(pagination);
   const resourceName = useMemo(() => ({
     singular: 'user',
@@ -60,7 +60,7 @@ export const AdminUsersTable: FC<CustomersTableProps> = ({customers, query, pagi
 
   return (
     <Card padding="0">
-      <AdminUsersTableFilters query={query}/>
+      {/*<AdminUsersTableFilters query={query}/>*/}
       <IndexTable
         resourceName={resourceName}
         itemCount={customers.length}
