@@ -18,7 +18,7 @@ export default function AdminCustomersIndex(){
         content: 'Add customer',
         icon: PlusIcon,
         accessibilityLabel: 'Create user',
-        url: EAdminNavigation.customers,
+        url: `${EAdminNavigation.customers}/new`,
       }}
     >
       <CustomersTable customers={data.customers} query={data.query} pagination={data.pagination}/>

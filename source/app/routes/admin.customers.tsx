@@ -5,7 +5,7 @@ import {adminLoader} from '~/.server/admin/loaders/admin.loader';
 
 export default function AdminCustomers() {
   const data = useRouteLoaderData<typeof adminLoader>('routes/admin');
-  console.log(data)
+
   if (!data?.user) {
     return null;
   }
