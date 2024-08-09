@@ -63,3 +63,47 @@ model CustomerAddress {
 
   customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
 }
+
+model Category {
+  id          Int       @id @default(autoincrement())
+  title       String    @db.VarChar(255)
+  description String?   @db.Text
+  image       String?   @db.VarChar(255)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime? @db.Timestamp(6)
+
+  products Product[]
+
+  @@map("categories") // Optional: specify the table name in the database
+}
+
+model Product {
+  id             Int           @id @default(autoincrement())
+  slug           String        @unique @db.VarChar(255)
+  title          String        @db.VarChar(255)
+  description    String?       @db.Text
+  image          String?       @db.VarChar(255)
+  price          Float
+  compareAtPrice Float?
+  costPerItem    Float?
+  quantity       Int
+  SKU            String?       @db.VarChar(255)
+  barcode        String?       @db.VarChar(255)
+  status         ProductStatus
+  rate           Float?
+  totalReviews   Int?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  deletedAt      DateTime?     @db.Timestamp(6)
+
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  @@map("products") // Optional: specify the table name in the database
+}
+
+enum ProductStatus {
+  active
+  draft
+}
