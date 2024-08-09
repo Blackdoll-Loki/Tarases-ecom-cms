@@ -36,7 +36,7 @@ export const CustomersTable: FC<CustomersTableProps> = ({customers, query, pagin
 
   const rowMarkup = customers.map(
     (
-      {id, email, firstName, lastName, createdAt, updatedAt, deletedAt},
+      {  id, firstName, lastName, email, phone, notes, createdAt, updatedAt,deletedAt},
       index,
     ) => (
       <IndexTable.Row

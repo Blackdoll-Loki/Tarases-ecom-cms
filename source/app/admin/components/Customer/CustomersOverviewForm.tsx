@@ -1,6 +1,15 @@
 import { Box, FormLayout, Layout, TextField } from "@shopify/polaris";
+import { FC } from "react";
+import { TCustomerDto } from "~/.server/admin/dto/customer.dto";
+import { ValidatedTextField } from "~/admin/ui/ValidatedTextField/ValidatedTextField";
 
-export const CustomersOverviewForm = () => {
+export type CustomersOverviewFormProps = {
+  customer: TCustomerDto;
+};
+
+export const CustomersOverviewForm: FC<CustomersOverviewFormProps> = (props) => {
+  const {customer: {firstName, lastName, email, phone}} = props;
+
   return (
     <Layout>
       <Layout.Section>
@@ -11,32 +20,39 @@ export const CustomersOverviewForm = () => {
           <Box width="586px" borderColor="border">
             <FormLayout>
               <FormLayout.Group>
-                <TextField
-                  label="First name"
-                  onChange={() => {}}
-                  autoComplete="off"
-                />
-                <TextField
-                  label="Last name"
-                  onChange={() => {}}
-                  autoComplete="off"
-                />
+                <ValidatedTextField
+                label="First Name"
+                type="text"
+                name="firstName"
+                autoComplete="given-name"
+                defaultValue={firstName}
+              />
+              <ValidatedTextField
+                label="Last Name"
+                type="text"
+                name="lastName"
+                autoComplete="last name"
+                defaultValue={lastName}
+              />
               </FormLayout.Group>
             </FormLayout>
             <FormLayout>
-              <TextField
-                type="email"
-                label="Email"
-                onChange={() => {}}
-                autoComplete="email"
-              />
+              <ValidatedTextField
+                  label="Email"
+                  type="text"
+                  name="email"
+                  autoComplete="Email"
+                  defaultValue={email}
+                />
             </FormLayout>
             <FormLayout>
-              <TextField
-                label="Phone number"
-                onChange={() => {}}
-                autoComplete="off"
-              />
+              <ValidatedTextField
+                    label="Phone"
+                    type="text"
+                    name="firstName"
+                    autoComplete="Phone"
+                    defaultValue={phone}
+                  />
             </FormLayout>
           </Box>
         </Box>
